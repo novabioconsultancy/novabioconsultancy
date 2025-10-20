@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About NovaBio - Our Founders & Healthcare Innovation Mission</title>
+    <meta name="description" content="Meet the visionary founders of NovaBio Consultancy. Learn about our September 2025 founding, mission to transform African healthcare, and expertise in Pharmaceuticals, MedTech, and Digital Health.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-teal': '#1B4B4B',
+                        'amber-gold': '#D4A574',
+                        'sage-green': '#7A9A8A',
+                        'terracotta': '#C17B5A',
+                        'coral': '#E07A5F',
+                        'soft-blue': '#5B8DB8',
+                        'warm-white': '#FEFEFE',
+                        'charcoal': '#2C2C2C'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(27, 75, 75, 0.15);
+        }
+        
+        .quiz-step {
+            display: none;
+        }
+        
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .founder-card {
+            transition: all 0.3s ease;
+        }
+        
+        .founder-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(27, 75, 75, 0.15);
+        }
+        
+        .expertise-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .expertise-card:hover {
+            border-color: #D4A574;
+            transform: translateY(-4px);
+        }
+        
+        .expertise-card.selected {
+            border-color: #D4A574;
+            background-color: rgba(212, 165, 116, 0.05);
+        }
+        
+        .african-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(212, 165, 116, 0.1) 2px, transparent 2px),
+                              radial-gradient(circle at 75% 75%, rgba(193, 123, 90, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #D4A574;
+            border-radius: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: #7A9A8A;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans text-charcoal bg-warm-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-white/95 backdrop-blur-sm border-b border-amber-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-deep-teal font-serif">NovaBio</a>
+                    <div class="ml-2 text-sm text-warm-gray">Consultancy</div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Home</a>
+                    <a href="services.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Services</a>
+                    <a href="about.html" class="nav-link text-deep-teal font-semibold">About</a>
+                    <a href="contact.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Contact</a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-deep-teal/5 to-amber-gold/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold text-deep-teal mb-6 font-serif">Our Story & Mission</h1>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    Founded in September 2025 by three visionary healthcare innovators, NovaBio Consultancy is transforming African healthcare through strategic innovation in Pharmaceuticals, MedTech, and Digital Health.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Mission -->
+    <section class="py-20 bg-warm-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-deep-teal mb-6 font-serif">Our Mission</h2>
+                    <p class="text-lg text-warm-gray mb-6">
+                        At NovaBio Consultancy, we believe the future of healthcare lies at the intersection of innovation and impact. Our mission is simple yet profound: to help transform bold healthcare ideas into real-world solutions that improve lives across Africa and beyond.
+                    </p>
+                    <p class="text-lg text-warm-gray mb-8">
+                        We stand at the forefront of biotech and healthcare innovation, working closely with our clients to drive progress and shape a healthier future for all. Through our expertise in Pharmaceuticals, MedTech, and Digital Health, we're not just consulting – we're partnering in the transformation of African healthcare.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="text-center p-6 bg-amber-gold/5 rounded-xl">
+                            <div class="text-3xl font-bold text-deep-teal mb-2">September 2025</div>
+                            <div class="text-warm-gray font-semibold">Founded</div>
+                        </div>
+                        <div class="text-center p-6 bg-amber-gold/5 rounded-xl">
+                            <div class="text-3xl font-bold text-deep-teal mb-2">3</div>
+                            <div class="text-warm-gray font-semibold">Visionary Founders</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="resources/nairobi-skyline.jpg" alt="Nairobi Innovation Hub" class="rounded-2xl shadow-lg w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founder Expertise Matchmaker -->
+    <section class="py-20 bg-amber-gold/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-deep-teal mb-4 font-serif">Find Your Perfect Founder Match</h2>
+                <p class="text-lg text-warm-gray">Answer a few questions to get matched with the right founder expert for your healthcare innovation project.</p>
+            </div>
+            
+            <div class="bg-warm-white rounded-2xl shadow-xl border border-amber-gold/20 p-8">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-sm text-warm-gray mb-2">
+                        <span>Question <span id="quiz-current-step">1</span> of 4</span>
+                        <span id="quiz-progress-percent">25%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="h-2 rounded-full bg-gradient-to-r from-deep-teal to-amber-gold" id="quiz-progress-bar" style="width: 25%"></div>
+                    </div>
+                </div>
+                
+                <!-- Question 1: Project Type -->
+                <div class="quiz-step active" id="quiz-step-1">
+                    <h3 class="text-2xl font-semibold text-deep-teal mb-6">What type of healthcare innovation are you working on?</h3>
+                    <div class="space-y-4 mb-8">
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="project-type" value="pharmaceuticals" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Pharmaceutical Innovation</div>
+                                <div class="text-sm text-warm-gray">Drug development, research, and market entry</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="project-type" value="medtech" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Medical Device Innovation</div>
+                                <div class="text-sm text-warm-gray">Medical devices and healthcare technology</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="project-type" value="digital-health" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Digital Health Solution</div>
+                                <div class="text-sm text-warm-gray">AI, data, and connected healthcare technologies</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="quiz-next-1">
+                            Next Question →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Question 2: Development Stage -->
+                <div class="quiz-step" id="quiz-step-2">
+                    <h3 class="text-2xl font-semibold text-deep-teal mb-6">What stage is your project in?</h3>
+                    <div class="space-y-4 mb-8">
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="development-stage" value="concept" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Concept & Research</div>
+                                <div class="text-sm text-warm-gray">Early ideation and feasibility studies</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="development-stage" value="development" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Development & Testing</div>
+                                <div class="text-sm text-warm-gray">Active development and prototyping</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="development-stage" value="market-ready" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Market Ready</div>
+                                <div class="text-sm text-warm-gray">Ready for launch and scaling</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="quiz-prev-2">
+                            ← Previous
+                        </button>
+                        <button class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="quiz-next-2">
+                            Next Question →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Question 3: Market Focus -->
+                <div class="quiz-step" id="quiz-step-3">
+                    <h3 class="text-2xl font-semibold text-deep-teal mb-6">Which market is your primary focus?</h3>
+                    <div class="space-y-4 mb-8">
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="market-focus" value="africa" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">African Markets</div>
+                                <div class="text-sm text-warm-gray">Kenya, Nigeria, South Africa, and regional expansion</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="market-focus" value="global" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Global Markets</div>
+                                <div class="text-sm text-warm-gray">International expansion and global reach</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="market-focus" value="local" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Local Focus</div>
+                                <div class="text-sm text-warm-gray">Kenya and East African Community</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="quiz-prev-3">
+                            ← Previous
+                        </button>
+                        <button class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="quiz-next-3">
+                            Next Question →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Question 4: Support Needs -->
+                <div class="quiz-step" id="quiz-step-4">
+                    <h3 class="text-2xl font-semibold text-deep-teal mb-6">What type of support do you need most?</h3>
+                    <div class="space-y-4 mb-8">
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="support-needs" value="strategy" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Strategic Planning</div>
+                                <div class="text-sm text-warm-gray">Market analysis, business strategy, and roadmap development</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="support-needs" value="technical" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Technical Development</div>
+                                <div class="text-sm text-warm-gray">Product development, testing, and validation</div>
+                            </div>
+                        </label>
+                        
+                        <label class="expertise-card flex items-center p-4 border-2 rounded-xl cursor-pointer hover:border-amber-gold transition-colors">
+                            <input type="radio" name="support-needs" value="regulatory" class="mr-4">
+                            <div>
+                                <div class="font-semibold text-deep-teal">Regulatory & Compliance</div>
+                                <div class="text-sm text-warm-gray">Regulatory approval, compliance, and market access</div>
+                            </div>
+                        </label>
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="quiz-prev-4">
+                            ← Previous
+                        </button>
+                        <button class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="quiz-get-results">
+                            Get My Match →
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results -->
+                <div class="quiz-step" id="quiz-results">
+                    <h3 class="text-2xl font-semibold text-deep-teal mb-6">Your Perfect Founder Match</h3>
+                    <div class="bg-sage-green/5 rounded-xl p-8 mb-8">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="text-center">
+                                <img src="resources/founder-armustarz.jpg" alt="Matched Founder" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover" id="matched-founder-image">
+                                <div>
+                                    <h4 class="text-xl font-bold text-deep-teal mb-2" id="matched-founder-name">Armustarz Magomere</h4>
+                                    <div class="text-warm-gray mb-4" id="matched-founder-title">CEO & Co-founder</div>
+                                    <div class="text-sm text-warm-gray" id="matched-founder-expertise">Healthcare Innovation Strategist</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-deep-teal mb-4">Why this match?</h5>
+                                <ul id="match-reasons" class="space-y-2 text-sm text-warm-gray">
+                                    <!-- Match reasons will be populated here -->
+                                </ul>
+                                
+                                <h5 class="font-semibold text-deep-teal mb-4 mt-6">Your Project Profile:</h5>
+                                <ul id="project-profile" class="space-y-1 text-sm text-warm-gray">
+                                    <!-- Project profile will be populated here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <p class="text-warm-gray mb-6">Ready to connect with your matched founder?</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button class="bg-amber-gold text-charcoal px-8 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" onclick="window.location.href='contact.html'">
+                                Schedule Consultation
+                            </button>
+                            <button class="border-2 border-deep-teal text-deep-teal px-8 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="restart-quiz">
+                                Take Quiz Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Founders Section -->
+    <section class="py-20 bg-deep-teal text-warm-white african-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4 font-serif">Meet Our Founders</h2>
+                <p class="text-xl text-warm-white/80 max-w-4xl mx-auto">
+                    Three visionary leaders driving healthcare innovation from Nairobi to the world.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="founder-card bg-warm-white/10 backdrop-blur-sm p-8 rounded-2xl border border-amber-gold/30 text-center">
+                    <img src="resources/founder-armustarz.jpg" alt="Armustarz Magomere" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="text-xl font-bold text-amber-gold mb-2">Armustarz Magomere</h3>
+                    <div class="text-warm-white/80 font-semibold mb-4">CEO & Co-founder</div>
+                    <p class="text-warm-white/70 text-sm mb-6">
+                        Healthcare innovation strategist with deep expertise in pharmaceutical development and market access across African markets. Former pharmaceutical executive with 15+ years of experience in drug development and regulatory strategy.
+                    </p>
+                    <div class="text-left mb-6">
+                        <h4 class="font-semibold text-amber-gold mb-3">Expertise:</h4>
+                        <ul class="text-sm text-warm-white/70 space-y-1">
+                            <li>• Pharmaceutical strategy and development</li>
+                            <li>• African market access and regulation</li>
+                            <li>• Healthcare policy and innovation</li>
+                            <li>• Clinical trial design and management</li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="founder-card bg-warm-white/10 backdrop-blur-sm p-8 rounded-2xl border border-amber-gold/30 text-center">
+                    <img src="resources/founder-brenda.jpg" alt="Brenda Karwitha" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="text-xl font-bold text-amber-gold mb-2">Brenda Karwitha</h3>
+                    <div class="text-warm-white/80 font-semibold mb-4">Co-founder</div>
+                    <p class="text-warm-white/70 text-sm mb-6">
+                        MedTech specialist focused on medical device innovation and regulatory strategy for emerging healthcare technologies. Biomedical engineer with expertise in device development and African healthcare systems integration.
+                    </p>
+                    <div class="text-left mb-6">
+                        <h4 class="font-semibold text-amber-gold mb-3">Expertise:</h4>
+                        <ul class="text-sm text-warm-white/70 space-y-1">
+                            <li>• Medical device development</li>
+                            <li>• Regulatory strategy and compliance</li>
+                            <li>• Healthcare technology assessment</li>
+                            <li>• Quality management systems</li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="founder-card bg-warm-white/10 backdrop-blur-sm p-8 rounded-2xl border border-amber-gold/30 text-center">
+                    <img src="resources/founder-ivan.jpg" alt="Ivan Onyunde" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="text-xl font-bold text-amber-gold mb-2">Ivan Onyunde</h3>
+                    <div class="text-warm-white/80 font-semibold mb-4">Co-founder</div>
+                    <p class="text-warm-white/70 text-sm mb-6">
+                        Digital health expert specializing in AI implementation, data analytics, and connected healthcare technology solutions. Computer scientist with expertise in healthcare AI and digital transformation across African markets.
+                    </p>
+                    <div class="text-left mb-6">
+                        <h4 class="font-semibold text-amber-gold mb-3">Expertise:</h4>
+                        <ul class="text-sm text-warm-white/70 space-y-1">
+                            <li>• AI and machine learning in healthcare</li>
+                            <li>• Digital health platform development</li>
+                            <li>• Healthcare data analytics</li>
+                            <li>• Connected health technologies</li>
+                        </ul>
+                    </div>
+                    <div class="flex justify-center space-x-4">
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <button class="text-amber-gold hover:text-warm-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Journey -->
+    <section class="py-20 bg-warm-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-deep-teal mb-4 font-serif">Our Journey</h2>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    From a shared vision in September 2025 to becoming a leading healthcare innovation consultancy in Africa.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <div class="timeline-item">
+                        <div class="bg-amber-gold/5 p-8 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <div class="text-2xl font-bold text-deep-teal mr-4">September 2025</div>
+                                <h3 class="text-xl font-semibold text-deep-teal">NovaBio Founded</h3>
+                            </div>
+                            <p class="text-warm-gray">
+                                Armustarz Magomere, Brenda Karwitha, and Ivan Onyunde come together with a shared vision to transform African healthcare through strategic innovation, founding NovaBio Consultancy in Nairobi, Kenya.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="bg-amber-gold/5 p-8 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <div class="text-2xl font-bold text-deep-teal mr-4">October 2025</div>
+                                <h3 class="text-xl font-semibold text-deep-teal">First Client Partnership</h3>
+                            </div>
+                            <p class="text-warm-gray">
+                                NovaBio secures its first major client partnership with a leading African pharmaceutical company, launching a comprehensive drug development strategy for the East African market.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="bg-amber-gold/5 p-8 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <div class="text-2xl font-bold text-deep-teal mr-4">December 2025</div>
+                                <h3 class="text-xl font-semibold text-deep-teal">Digital Health Innovation Hub</h3>
+                            </div>
+                            <p class="text-warm-gray">
+                                Launch of the Digital Health Innovation Hub, providing African healthcare startups with access to cutting-edge AI and digital health technologies, along with implementation support.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="bg-amber-gold/5 p-8 rounded-2xl">
+                            <div class="flex items-center mb-4">
+                                <div class="text-2xl font-bold text-deep-teal mr-4">2026</div>
+                                <h3 class="text-xl font-semibold text-deep-teal">Expanding Impact</h3>
+                            </div>
+                            <p class="text-warm-gray">
+                                NovaBio continues to expand its impact across Africa, working with healthcare innovators to bring life-changing solutions to patients and communities throughout the continent.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20 bg-sage-green/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-deep-teal mb-4 font-serif">Our Values</h2>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    The principles that guide our work and define our commitment to healthcare innovation.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-hover bg-warm-white p-8 rounded-2xl border border-amber-gold/20 text-center">
+                    <div class="w-16 h-16 bg-deep-teal/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-deep-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Innovation Excellence</h3>
+                    <p class="text-warm-gray text-sm">Pushing the boundaries of what's possible in African healthcare through cutting-edge solutions and creative thinking.</p>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-8 rounded-2xl border border-amber-gold/20 text-center">
+                    <div class="w-16 h-16 bg-amber-gold/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-amber-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Patient-Centered</h3>
+                    <p class="text-warm-gray text-sm">Always putting patients first, ensuring our innovations directly improve health outcomes and quality of life.</p>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-8 rounded-2xl border border-amber-gold/20 text-center">
+                    <div class="w-16 h-16 bg-sage-green/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-sage-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Data-Driven</h3>
+                    <p class="text-warm-gray text-sm">Using evidence-based approaches and advanced analytics to guide decisions and measure impact.</p>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-8 rounded-2xl border border-amber-gold/20 text-center">
+                    <div class="w-16 h-16 bg-soft-blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-soft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Sustainable Impact</h3>
+                    <p class="text-warm-gray text-sm">Creating lasting solutions that are economically viable and environmentally responsible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-deep-teal text-warm-white african-pattern">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6 font-serif">Ready to Partner with NovaBio?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Join us in our mission to transform healthcare across Africa. Whether you're starting with an idea or scaling an existing solution, our founding team is ready to help you create meaningful impact.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-amber-gold text-charcoal px-8 py-4 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors">
+                    Start Your Innovation Journey
+                </a>
+                <a href="services.html" class="border-2 border-warm-white text-warm-white px-8 py-4 rounded-lg font-semibold hover:bg-warm-white hover:text-deep-teal transition-colors">
+                    Explore Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-warm-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-2 font-serif">NovaBio Consultancy</div>
+                <div class="text-warm-white/60 mb-8">Driving Healthcare Innovation from Nairobi to the World</div>
+                <div class="text-warm-white/40 text-sm">
+                    © 2025 NovaBio Consultancy. Founded with passion for African healthcare excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

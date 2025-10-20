@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - NovaBio Consultancy | Pharmaceuticals, MedTech, Digital Health</title>
+    <meta name="description" content="Comprehensive healthcare innovation services in Pharmaceuticals, MedTech, and Digital Health. From concept to market with African excellence and global standards.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-teal': '#1B4B4B',
+                        'amber-gold': '#D4A574',
+                        'sage-green': '#7A9A8A',
+                        'terracotta': '#C17B5A',
+                        'coral': '#E07A5F',
+                        'soft-blue': '#5B8DB8',
+                        'warm-white': '#FEFEFE',
+                        'charcoal': '#2C2C2C'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(27, 75, 75, 0.15);
+        }
+        
+        .timeline-container {
+            position: relative;
+            overflow-x: auto;
+            padding: 2rem 0;
+        }
+        
+        .timeline-track {
+            display: flex;
+            min-width: 1200px;
+            position: relative;
+        }
+        
+        .timeline-item {
+            flex: 1;
+            position: relative;
+            padding: 0 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #1B4B4B;
+            margin: 0 auto 1rem;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-dot {
+            background: #D4A574;
+            transform: scale(1.2);
+        }
+        
+        .timeline-line {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1B4B4B 0%, #D4A574 100%);
+            z-index: 1;
+        }
+        
+        .service-section {
+            scroll-margin-top: 100px;
+        }
+        
+        .african-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(212, 165, 116, 0.1) 2px, transparent 2px),
+                              radial-gradient(circle at 75% 75%, rgba(193, 123, 90, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        
+        .innovation-hub {
+            background: linear-gradient(135deg, rgba(27, 75, 75, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+        }
+    </style>
+</head>
+<body class="font-sans text-charcoal bg-warm-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-white/95 backdrop-blur-sm border-b border-amber-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-deep-teal font-serif">NovaBio</a>
+                    <div class="ml-2 text-sm text-warm-gray">Consultancy</div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Home</a>
+                    <a href="services.html" class="nav-link text-deep-teal font-semibold">Services</a>
+                    <a href="about.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">About</a>
+                    <a href="contact.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Contact</a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-deep-teal/5 to-amber-gold/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold text-deep-teal mb-6 font-serif">Healthcare Innovation Services</h1>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    From concept to market, we provide comprehensive support across Pharmaceuticals, MedTech, and Digital Health, driving innovation that transforms healthcare across Africa and beyond.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Timeline -->
+    <section class="py-20 bg-warm-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-deep-teal mb-4 font-serif">Innovation Pathway Timeline</h2>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    Navigate your healthcare innovation journey with our comprehensive pathway from initial concept to market success.
+                </p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item" data-phase="discovery">
+                        <div class="timeline-dot"></div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-deep-teal mb-2">Discovery</h3>
+                            <p class="text-sm text-warm-gray">Research & Ideation</p>
+                            <div class="mt-4 p-4 bg-amber-gold/10 rounded-lg hidden timeline-details">
+                                <p class="text-sm">Market research, needs assessment, and initial concept development with feasibility studies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-phase="development">
+                        <div class="timeline-dot"></div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-deep-teal mb-2">Development</h3>
+                            <p class="text-sm text-warm-gray">Product Creation</p>
+                            <div class="mt-4 p-4 bg-amber-gold/10 rounded-lg hidden timeline-details">
+                                <p class="text-sm">Product development, prototyping, testing, and validation across all three focus areas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-phase="validation">
+                        <div class="timeline-dot"></div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-deep-teal mb-2">Validation</h3>
+                            <p class="text-sm text-warm-gray">Testing & Approval</p>
+                            <div class="mt-4 p-4 bg-amber-gold/10 rounded-lg hidden timeline-details">
+                                <p class="text-sm">Clinical trials, regulatory submissions, and compliance verification for market readiness.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-phase="regulatory">
+                        <div class="timeline-dot"></div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-deep-teal mb-2">Regulatory</h3>
+                            <p class="text-sm text-warm-gray">Compliance & Approval</p>
+                            <div class="mt-4 p-4 bg-amber-gold/10 rounded-lg hidden timeline-details">
+                                <p class="text-sm">Regulatory strategy, submission management, and approval pathway optimization.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item" data-phase="market">
+                        <div class="timeline-dot"></div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-deep-teal mb-2">Market Entry</h3>
+                            <p class="text-sm text-warm-gray">Launch & Scale</p>
+                            <div class="mt-4 p-4 bg-amber-gold/10 rounded-lg hidden timeline-details">
+                                <p class="text-sm">Market access strategy, launch planning, and scaling for sustainable impact.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pharmaceuticals Section -->
+    <section class="py-20 bg-sage-green/5 service-section" id="pharmaceuticals">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-deep-teal mb-6 font-serif">Pharmaceuticals</h2>
+                    <p class="text-lg text-warm-gray mb-6">
+                        From research to market entry, we guide pharmaceutical innovations through regulatory pathways, clinical development, and market access strategies that bring life-saving medicines to patients faster across African markets.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-deep-teal rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Drug Development Strategy</h4>
+                                <p class="text-warm-gray">Comprehensive planning from preclinical research through Phase III trials, optimizing development pathways for African and global markets.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-deep-teal rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Regulatory Compliance</h4>
+                                <p class="text-warm-gray">Expert guidance through FDA, EMA, and African regulatory bodies, ensuring compliance with international and local requirements.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-deep-teal rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Market Access Strategy</h4>
+                                <p class="text-warm-gray">Pricing, reimbursement, and market entry strategies tailored for African healthcare systems and patient populations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="contact.html" class="bg-deep-teal text-warm-white px-6 py-3 rounded-lg font-semibold hover:bg-amber-gold hover:text-charcoal transition-colors">
+                            Discuss Your Pharma Project
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <img src="resources/pharmaceuticals-lab.jpg" alt="Pharmaceutical Research Laboratory" class="rounded-2xl shadow-lg w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MedTech Section -->
+    <section class="py-20 bg-warm-white service-section" id="medtech">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="lg:order-2">
+                    <h2 class="text-4xl font-bold text-deep-teal mb-6 font-serif">MedTech</h2>
+                    <p class="text-lg text-warm-gray mb-6">
+                        We support medical device innovators in creating safe, effective, and user-friendly technologies that advance clinical care and improve patient outcomes across diverse healthcare settings in Africa.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-sage-green rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Device Development</h4>
+                                <p class="text-warm-gray">End-to-end medical device development from concept to commercialization, with focus on African healthcare needs and constraints.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-sage-green rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Regulatory Strategy</h4>
+                                <p class="text-warm-gray">Expert navigation of medical device regulations including ISO 13485, FDA, and African medical device regulatory frameworks.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-sage-green rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Clinical Validation</h4>
+                                <p class="text-warm-gray">Clinical trial design and execution for medical devices, ensuring safety and efficacy validation in target populations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="contact.html" class="bg-sage-green text-warm-white px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors">
+                            Explore MedTech Solutions
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:order-1">
+                    <img src="resources/medtech-device.jpg" alt="Medical Device Development" class="rounded-2xl shadow-lg w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Digital Health Section -->
+    <section class="py-20 bg-soft-blue/5 service-section" id="digital-health">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-deep-teal mb-6 font-serif">Digital Health</h2>
+                    <p class="text-lg text-warm-gray mb-6">
+                        Harness the power of AI, data analytics, and connected technologies to make healthcare smarter, more personalized, and accessible through innovative digital solutions and platforms designed for African healthcare systems.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-soft-blue rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">AI Implementation</h4>
+                                <p class="text-warm-gray">Artificial intelligence solutions for diagnostics, treatment optimization, and predictive analytics in healthcare settings.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-soft-blue rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Data Analytics</h4>
+                                <p class="text-warm-gray">Advanced healthcare data analytics for population health management, clinical decision support, and operational optimization.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-soft-blue rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <svg class="w-4 h-4 text-warm-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-deep-teal mb-2">Connected Health Platforms</h4>
+                                <p class="text-warm-gray">Integrated digital health platforms connecting patients, providers, and healthcare systems for coordinated care delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="contact.html" class="bg-soft-blue text-warm-white px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors">
+                            Explore Digital Health
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <img src="resources/digital-health.jpg" alt="Digital Health Technology" class="rounded-2xl shadow-lg w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Hub -->
+    <section class="py-20 innovation-hub">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-deep-teal mb-4 font-serif">Digital Health Innovation Hub</h2>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    Explore cutting-edge digital health technologies and their applications in African healthcare systems.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-deep-teal/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-deep-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">AI-Powered Diagnostics</h3>
+                    <p class="text-warm-gray mb-4">Machine learning algorithms for early disease detection and diagnostic accuracy improvement in resource-constrained settings.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 300% improvement in diagnostic speed</div>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-sage-green/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-sage-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">Remote Patient Monitoring</h3>
+                    <p class="text-warm-gray mb-4">IoT-enabled monitoring systems for chronic disease management and post-treatment care in rural and urban areas.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 45% reduction in hospital readmissions</div>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-soft-blue/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-soft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">Digital Therapeutics</h3>
+                    <p class="text-warm-gray mb-4">Evidence-based therapeutic interventions delivered through digital platforms for mental health and chronic disease management.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 60% improvement in treatment adherence</div>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-coral/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-coral" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">Health Data Analytics</h3>
+                    <p class="text-warm-gray mb-4">Advanced analytics platforms for population health insights, resource optimization, and predictive healthcare planning.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 25% improvement in resource allocation</div>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-terracotta/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">Clinical Decision Support</h3>
+                    <p class="text-warm-gray mb-4">AI-powered decision support tools for healthcare providers, improving diagnostic accuracy and treatment recommendations.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 40% reduction in diagnostic errors</div>
+                </div>
+                
+                <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                    <div class="w-12 h-12 bg-deep-teal/10 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-deep-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-deep-teal mb-3">Patient Engagement Platforms</h3>
+                    <p class="text-warm-gray mb-4">Comprehensive platforms for patient education, communication, and self-management tools with multilingual support.</p>
+                    <div class="text-sm text-amber-gold font-semibold">ROI: 50% increase in patient satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-deep-teal text-warm-white african-pattern">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6 font-serif">Ready to Innovate?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Whether you're developing pharmaceuticals, medical devices, or digital health solutions, NovaBio provides the expertise and support you need to succeed in African healthcare markets.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-amber-gold text-charcoal px-8 py-4 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors">
+                    Start Your Project
+                </a>
+                <a href="about.html" class="border-2 border-warm-white text-warm-white px-8 py-4 rounded-lg font-semibold hover:bg-warm-white hover:text-deep-teal transition-colors">
+                    Meet Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-warm-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-2 font-serif">NovaBio Consultancy</div>
+                <div class="text-warm-white/60 mb-8">Driving Healthcare Innovation from Nairobi to the World</div>
+                <div class="text-warm-white/40 text-sm">
+                    © 2025 NovaBio Consultancy. Founded with passion for African healthcare excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

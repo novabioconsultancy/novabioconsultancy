@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact NovaBio - Nairobi Healthcare Innovation Consultancy</title>
+    <meta name="description" content="Contact NovaBio Consultancy in Nairobi, Kenya. Connect with our founders for healthcare innovation in Pharmaceuticals, MedTech, and Digital Health. Schedule your consultation today.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-teal': '#1B4B4B',
+                        'amber-gold': '#D4A574',
+                        'sage-green': '#7A9A8A',
+                        'terracotta': '#C17B5A',
+                        'coral': '#E07A5F',
+                        'soft-blue': '#5B8DB8',
+                        'warm-white': '#FEFEFE',
+                        'charcoal': '#2C2C2C'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(27, 75, 75, 0.15);
+        }
+        
+        .form-step {
+            display: none;
+        }
+        
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .calendar-day {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .calendar-day:hover {
+            background-color: rgba(212, 165, 116, 0.1);
+        }
+        
+        .calendar-day.available {
+            background-color: rgba(122, 154, 138, 0.2);
+        }
+        
+        .calendar-day.selected {
+            background-color: #D4A574;
+            color: white;
+        }
+        
+        .time-slot {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .time-slot:hover {
+            background-color: rgba(212, 165, 116, 0.1);
+        }
+        
+        .time-slot.selected {
+            background-color: #D4A574;
+            color: white;
+        }
+        
+        .success-message {
+            display: none;
+        }
+        
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .african-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(212, 165, 116, 0.1) 2px, transparent 2px),
+                              radial-gradient(circle at 75% 75%, rgba(193, 123, 90, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+        
+        .nairobi-skyline {
+            background: linear-gradient(135deg, #1B4B4B 0%, #7A9A8A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nairobi-skyline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('resources/nairobi-skyline.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .nairobi-skyline > * {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body class="font-sans text-charcoal bg-warm-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-warm-white/95 backdrop-blur-sm border-b border-amber-gold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-deep-teal font-serif">NovaBio</a>
+                    <div class="ml-2 text-sm text-warm-gray">Consultancy</div>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Home</a>
+                    <a href="services.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">Services</a>
+                    <a href="about.html" class="nav-link text-charcoal hover:text-deep-teal transition-colors duration-300">About</a>
+                    <a href="contact.html" class="nav-link text-deep-teal font-semibold">Contact</a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-24 pb-16 bg-gradient-to-br from-deep-teal/5 to-amber-gold/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl font-bold text-deep-teal mb-6 font-serif">Let's Transform Healthcare Together</h1>
+                <p class="text-xl text-warm-gray max-w-4xl mx-auto">
+                    Ready to innovate in African healthcare? Connect with our founding team in Nairobi and start your journey toward meaningful healthcare impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-20 bg-warm-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="text-3xl font-bold text-deep-teal mb-6 font-serif">Get In Touch</h2>
+                    <p class="text-warm-gray mb-8">
+                        Tell us about your healthcare innovation project and we'll connect you with the right founder expert for your needs.
+                    </p>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <!-- Step 1: Basic Information -->
+                        <div class="form-step active" id="contact-step-1">
+                            <h3 class="text-xl font-semibold text-deep-teal mb-4">Contact Information</h3>
+                            <div class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-deep-teal mb-2">First Name *</label>
+                                        <input type="text" name="firstName" required class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-semibold text-deep-teal mb-2">Last Name *</label>
+                                        <input type="text" name="lastName" required class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Email Address *</label>
+                                    <input type="email" name="email" required class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Phone Number</label>
+                                    <input type="tel" name="phone" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Company/Organization *</label>
+                                    <input type="text" name="company" required class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Your Role</label>
+                                    <select name="role" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                        <option value="">Select your role</option>
+                                        <option value="ceo">CEO/President</option>
+                                        <option value="vp">VP/Director</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="scientist">Scientist/Researcher</option>
+                                        <option value="entrepreneur">Entrepreneur</option>
+                                        <option value="investor">Investor</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-end mt-6">
+                                <button type="button" class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="contact-next-1">
+                                    Next Step →
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Project Details -->
+                        <div class="form-step" id="contact-step-2">
+                            <h3 class="text-xl font-semibold text-deep-teal mb-4">Project Details</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Innovation Focus Area *</label>
+                                    <select name="focusArea" required class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                        <option value="">Select focus area</option>
+                                        <option value="pharmaceuticals">Pharmaceuticals</option>
+                                        <option value="medtech">MedTech</option>
+                                        <option value="digital-health">Digital Health</option>
+                                        <option value="combination">Combination</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Project Stage</label>
+                                    <select name="projectStage" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                        <option value="">Select project stage</option>
+                                        <option value="concept">Concept & Research</option>
+                                        <option value="development">Development & Testing</option>
+                                        <option value="validation">Validation & Trials</option>
+                                        <option value="market-ready">Market Ready</option>
+                                        <option value="scaling">Scaling & Growth</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Target Market</label>
+                                    <select name="targetMarket" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                        <option value="">Select target market</option>
+                                        <option value="kenya">Kenya</option>
+                                        <option value="east-africa">East Africa</option>
+                                        <option value="africa">Africa (Continental)</option>
+                                        <option value="global">Global Markets</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Services Needed</label>
+                                    <div class="space-y-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="services[]" value="strategy" class="mr-3">
+                                            <span class="text-sm">Strategic Planning</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="services[]" value="regulatory" class="mr-3">
+                                            <span class="text-sm">Regulatory Affairs</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="services[]" value="development" class="mr-3">
+                                            <span class="text-sm">Product Development</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="services[]" value="market-access" class="mr-3">
+                                            <span class="text-sm">Market Access</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="services[]" value="funding" class="mr-3">
+                                            <span class="text-sm">Funding & Investment</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Project Description</label>
+                                    <textarea name="description" rows="4" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold" placeholder="Please provide a brief description of your healthcare innovation project and specific needs..."></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-deep-teal mb-2">Timeline</label>
+                                    <select name="timeline" class="w-full px-4 py-3 border border-amber-gold/30 rounded-lg focus:outline-none focus:border-amber-gold">
+                                        <option value="">Select timeline</option>
+                                        <option value="immediate">Immediate (within 1 month)</option>
+                                        <option value="short-term">Short-term (1-3 months)</option>
+                                        <option value="medium-term">Medium-term (3-6 months)</option>
+                                        <option value="long-term">Long-term (6+ months)</option>
+                                        <option value="exploring">Just exploring options</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between mt-6">
+                                <button type="button" class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="contact-prev-2">
+                                    ← Previous
+                                </button>
+                                <button type="button" class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors" id="contact-next-2">
+                                    Schedule Consultation →
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Consultation Scheduler -->
+                        <div class="form-step" id="contact-step-3">
+                            <h3 class="text-xl font-semibold text-deep-teal mb-4">Schedule Your Consultation</h3>
+                            <p class="text-warm-gray mb-6">Select a convenient time for your consultation with one of our founders at our Nairobi headquarters.</p>
+                            
+                            <!-- Calendar -->
+                            <div class="mb-8">
+                                <h4 class="font-semibold text-deep-teal mb-4">Select Date</h4>
+                                <div class="bg-amber-gold/5 rounded-xl p-6">
+                                    <div class="text-center mb-4">
+                                        <h5 class="font-semibold text-deep-teal">November 2025</h5>
+                                    </div>
+                                    <div class="grid grid-cols-7 gap-2 text-center text-sm">
+                                        <div class="font-semibold text-warm-gray p-2">Sun</div>
+                                        <div class="font-semibold text-warm-gray p-2">Mon</div>
+                                        <div class="font-semibold text-warm-gray p-2">Tue</div>
+                                        <div class="font-semibold text-warm-gray p-2">Wed</div>
+                                        <div class="font-semibold text-warm-gray p-2">Thu</div>
+                                        <div class="font-semibold text-warm-gray p-2">Fri</div>
+                                        <div class="font-semibold text-warm-gray p-2">Sat</div>
+                                        
+                                        <!-- Calendar days -->
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">26</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">27</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">28</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">29</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">30</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">31</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">1</div>
+                                        
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">2</div>
+                                        <div class="calendar-day available p-2 rounded-lg">3</div>
+                                        <div class="calendar-day available p-2 rounded-lg">4</div>
+                                        <div class="calendar-day available p-2 rounded-lg">5</div>
+                                        <div class="calendar-day available p-2 rounded-lg">6</div>
+                                        <div class="calendar-day available p-2 rounded-lg">7</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">8</div>
+                                        
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">9</div>
+                                        <div class="calendar-day available p-2 rounded-lg">10</div>
+                                        <div class="calendar-day available p-2 rounded-lg">11</div>
+                                        <div class="calendar-day available p-2 rounded-lg">12</div>
+                                        <div class="calendar-day available p-2 rounded-lg">13</div>
+                                        <div class="calendar-day available p-2 rounded-lg">14</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">15</div>
+                                        
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">16</div>
+                                        <div class="calendar-day available p-2 rounded-lg">17</div>
+                                        <div class="calendar-day available p-2 rounded-lg">18</div>
+                                        <div class="calendar-day available p-2 rounded-lg">19</div>
+                                        <div class="calendar-day available p-2 rounded-lg">20</div>
+                                        <div class="calendar-day available p-2 rounded-lg">21</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">22</div>
+                                        
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">23</div>
+                                        <div class="calendar-day available p-2 rounded-lg">24</div>
+                                        <div class="calendar-day available p-2 rounded-lg">25</div>
+                                        <div class="calendar-day available p-2 rounded-lg">26</div>
+                                        <div class="calendar-day available p-2 rounded-lg">27</div>
+                                        <div class="calendar-day available p-2 rounded-lg">28</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">29</div>
+                                        
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">30</div>
+                                        <div class="calendar-day available p-2 rounded-lg">1</div>
+                                        <div class="calendar-day available p-2 rounded-lg">2</div>
+                                        <div class="calendar-day available p-2 rounded-lg">3</div>
+                                        <div class="calendar-day available p-2 rounded-lg">4</div>
+                                        <div class="calendar-day available p-2 rounded-lg">5</div>
+                                        <div class="calendar-day p-2 rounded-lg text-gray-400">6</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Time Slots -->
+                            <div class="mb-8">
+                                <h4 class="font-semibold text-deep-teal mb-4">Available Time Slots (EAT)</h4>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="time-slots">
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        9:00 AM
+                                    </div>
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        10:30 AM
+                                    </div>
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        12:00 PM
+                                    </div>
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        2:00 PM
+                                    </div>
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        3:30 PM
+                                    </div>
+                                    <div class="time-slot p-3 border border-amber-gold/30 rounded-lg text-center">
+                                        5:00 PM
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <button type="button" class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors" id="contact-prev-3">
+                                    ← Previous
+                                </button>
+                                <button type="submit" class="bg-amber-gold text-charcoal px-8 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors">
+                                    Submit Request
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div class="success-message bg-sage-green/5 rounded-xl p-8 text-center" id="success-message">
+                        <div class="w-16 h-16 bg-amber-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-charcoal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-deep-teal mb-4 font-serif">Thank You!</h3>
+                        <p class="text-warm-gray mb-6">
+                            Your consultation request has been submitted successfully. We'll contact you within 24 hours to confirm your appointment with the appropriate founder expert at our Nairobi headquarters.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="index.html" class="bg-amber-gold text-charcoal px-6 py-3 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors">
+                                Return Home
+                            </a>
+                            <a href="services.html" class="border-2 border-deep-teal text-deep-teal px-6 py-3 rounded-lg font-semibold hover:bg-deep-teal hover:text-warm-white transition-colors">
+                                Explore Services
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <h2 class="text-3xl font-bold text-deep-teal mb-6 font-serif">Contact Information</h2>
+                    <p class="text-warm-gray mb-8">
+                        Based in Nairobi, Kenya, we're at the heart of African healthcare innovation. Connect with us directly or visit our headquarters.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-deep-teal/10 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-deep-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-deep-teal mb-2">Phone</h3>
+                                    <p class="text-warm-gray">+254 712 345 678</p>
+                                    <p class="text-sm text-warm-gray mt-1">Monday - Friday, 8:00 AM - 6:00 PM EAT</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-amber-gold/10 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-amber-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-deep-teal mb-2">Email</h3>
+                                    <p class="text-warm-gray">hello@novabio.consulting</p>
+                                    <p class="text-sm text-warm-gray mt-1">We respond within 24 hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-sage-green/10 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-sage-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-deep-teal mb-2">Nairobi Headquarters</h3>
+                                    <div class="text-warm-gray space-y-1">
+                                        <p><strong>NovaBio Consultancy</strong><br>123 Innovation Drive, Suite 400<br>Nairobi, Kenya 00100</p>
+                                        <p class="text-sm mt-2">Located in the heart of Nairobi's innovation district</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-warm-white p-6 rounded-2xl border border-amber-gold/20">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-soft-blue/10 rounded-lg flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-soft-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-deep-teal mb-2">Emergency Support</h3>
+                                    <p class="text-warm-gray">+254 700 123 456</p>
+                                    <p class="text-sm text-warm-gray mt-1">24/7 support for critical healthcare innovation projects</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="mt-8">
+                        <h3 class="font-semibold text-deep-teal mb-4">Connect With Us</h3>
+                        <div class="flex space-x-4">
+                            <button class="w-10 h-10 bg-deep-teal/10 rounded-lg flex items-center justify-center hover:bg-deep-teal hover:text-warm-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-amber-gold/10 rounded-lg flex items-center justify-center hover:bg-amber-gold hover:text-warm-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84"></path>
+                                </svg>
+                            </button>
+                            <button class="w-10 h-10 bg-sage-green/10 rounded-lg flex items-center justify-center hover:bg-sage-green hover:text-warm-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nairobi Location Highlight -->
+    <section class="py-20 nairobi-skyline text-warm-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold mb-6 font-serif">Nairobi: Africa's Innovation Hub</h2>
+                <p class="text-xl mb-8 max-w-4xl mx-auto">
+                    Located in the heart of Kenya's capital, NovaBio is perfectly positioned to drive healthcare innovation across Africa. Nairobi's vibrant tech ecosystem and strategic location make it the ideal base for transforming African healthcare.
+                </p>
+                <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-amber-gold mb-2">#1</div>
+                        <div class="text-warm-white/80">Tech Hub in Africa</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-amber-gold mb-2">50+</div>
+                        <div class="text-warm-white/80">Health Tech Startups</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-amber-gold mb-2">24/7</div>
+                        <div class="text-warm-white/80">Innovation Energy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-sage-green/5">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-deep-teal mb-4 font-serif">Frequently Asked Questions</h2>
+                <p class="text-xl text-warm-gray">
+                    Common questions about working with NovaBio and our healthcare innovation process.
+                </p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-warm-white rounded-2xl border border-amber-gold/20 p-6">
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">How quickly can NovaBio start working on my project?</h3>
+                    <p class="text-warm-gray">
+                        We can typically begin initial consultations within 48 hours and start active project work within 1-2 weeks, depending on the complexity and scope of your healthcare innovation needs.
+                    </p>
+                </div>
+                
+                <div class="bg-warm-white rounded-2xl border border-amber-gold/20 p-6">
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Do you work with international clients outside Africa?</h3>
+                    <p class="text-warm-gray">
+                        Yes, while our expertise is focused on African healthcare markets, we work with international clients looking to enter or understand African healthcare systems and opportunities.
+                    </p>
+                </div>
+                
+                <div class="bg-warm-white rounded-2xl border border-amber-gold/20 p-6">
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">What makes NovaBio different from other consultancies?</h3>
+                    <p class="text-warm-gray">
+                        Our deep understanding of African healthcare systems, combined with our founders' specialized expertise in Pharmaceuticals, MedTech, and Digital Health, allows us to provide culturally relevant and practically implementable solutions.
+                    </p>
+                </div>
+                
+                <div class="bg-warm-white rounded-2xl border border-amber-gold/20 p-6">
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">Can you help with regulatory approval in multiple African countries?</h3>
+                    <p class="text-warm-gray">
+                        Yes, we have expertise in regulatory pathways across East Africa, West Africa, and Southern Africa, including Kenya, Nigeria, South Africa, and regional economic communities.
+                    </p>
+                </div>
+                
+                <div class="bg-warm-white rounded-2xl border border-amber-gold/20 p-6">
+                    <h3 class="text-lg font-semibold text-deep-teal mb-3">What's the typical project timeline?</h3>
+                    <p class="text-warm-gray">
+                        Project timelines vary based on scope and complexity. Strategic planning projects typically take 2-3 months, while comprehensive development programs can span 6-18 months with ongoing support.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-deep-teal text-warm-white african-pattern">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-6 font-serif">Ready to Innovate African Healthcare?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Join the growing community of healthcare innovators working with NovaBio to transform African healthcare. From our Nairobi headquarters, we're ready to help you create lasting impact.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact-form" class="bg-amber-gold text-charcoal px-8 py-4 rounded-lg font-semibold hover:bg-terracotta hover:text-warm-white transition-colors">
+                    Schedule Your Consultation
+                </a>
+                <a href="about.html" class="border-2 border-warm-white text-warm-white px-8 py-4 rounded-lg font-semibold hover:bg-warm-white hover:text-deep-teal transition-colors">
+                    Meet Our Founders
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-warm-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="text-2xl font-bold mb-2 font-serif">NovaBio Consultancy</div>
+                <div class="text-warm-white/60 mb-8">Driving Healthcare Innovation from Nairobi to the World</div>
+                <div class="text-warm-white/40 text-sm">
+                    © 2025 NovaBio Consultancy. Founded with passion for African healthcare excellence.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
